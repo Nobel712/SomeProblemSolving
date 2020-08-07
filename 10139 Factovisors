@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mx 100000
+typedef long long ll;
+bool prime[mx];
+vector<ll>v;
+void sieve()
+{
+    memset(prime,true,sizeof(prime));
+    for(ll i=2; i*i<=mx; i++)
+    {
+        if(prime[i]==true)
+        {
+            for(ll j=i*i; j<=mx; j+=i)
+            {
+                prime[j]=false;
+            }
+        }
+    }
+    for(ll k=2; k<=mx; k++)
+    {
+        if(prime[k])
+            v.push_back(k);
+    }
+}
+ll ar[mx];
+bool fact(ll n,ll m)
+{
+    memset(ar,0,sizeof(ar));
+    for(ll i=0; i<v.size(); i++)
+    {
+        ll r=n;
+        while(r)
+        {
+            ar[v[i]]+=r/v[i];
+            r/=v[i];
+        }
+    }
+    for(int j=0; v[j]*v[j]<=m; j++)
+    {
+        while(m%v[j]==0)
+        {
+            ar[v[j]]--;
+            m/=v[j];
+        }
+    }
+    if(m>1)
+    {
+        if(n<m)
+            return false;
+    }
+    for(ll i=0; i<v.size(); i++)
+    {
+        if(ar[v[i]]<0)
+            return false;
+    }
+    return true;
+}
+int main()
+{
+    sieve();
+    ll n,m;
+    while(cin>>n>>m)
+    {
+        if(n>=m)
+        {
+            cout<<m<<" divides "<<n<<"!"<<endl;
+            continue;
+        }
+        if(fact(n,m))
+            cout<<m<<" divides "<<n<<"!"<<endl;
+        else
+            cout<<m<<" does not divide "<<n<<"!"<<endl;
+    }
+    return 0;
+}
