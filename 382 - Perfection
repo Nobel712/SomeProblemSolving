@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>v;
+int main()
+{
+    int n;
+    cout<<"PERFECTION OUTPUT"<<endl;
+    while(cin>>n)
+    {
+        if(n==0)
+        {
+            cout<<"END OF OUTPUT"<<endl;
+            return 0;
+        }
+        for(int i=1; i<=n/2; i++)
+        {
+            if(i*i==n)
+                v.push_back(i);
+            else if(n%i==0)
+                v.push_back(i);
+        }
+        int sum=0;
+        for(int i=0; i<v.size(); i++)
+        {
+            sum+=v[i];
+        }
+        v.clear();
+        if(n == sum)
+            printf("%5d  PERFECT\n",n);
+        if(sum > n)
+            printf("%5d  ABUNDANT\n",n);
+        if(sum < n)
+            printf("%5d  DEFICIENT\n",n);;
+    }
+    return 0;
+}
