@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    while(cin>>n)
+    {
+        if(n<0)
+            return 0;
+        int sum,f=0;
+        int i=sqrt(n)+1;
+        for(; i>1; i--)
+        {
+            sum=n;
+            int j=0;
+           for(; j<i; j++)
+            {
+                if(sum%i!=1)
+                    break;
+                sum-=1;
+                sum-=sum/i;
+            }
+             if(j==i&&sum%i==0)
+            {
+                f=1;
+                break;
+            }
+        }
+        cout<<n<<" coconuts, ";
+        if(f)
+            cout<<i<<" people and 1 monkey"<<endl;
+        else
+            cout<<"no solution"<<endl;
+    }
+    return 0;
+}
