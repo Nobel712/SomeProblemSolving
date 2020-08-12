@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+vector<int>v[10001];
+bool visited[10001];
+void dfs(int n)
+{
+    visited[n]=true;
+
+    for(int i=0;i<v[n].size();i++)
+    {
+        int r=v[n][i];
+        if(visited[r]==false)
+            dfs(r);
+    }
+}
+int main()
+{
+    int t,n,m,l;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m>>l;
+        for(int i=0;i<=n;i++)
+        {
+            v[i].clear();
+            visited[i]=false;
+        }
+        for(int i=0;i<m;i++)
+        {
+
+            int u, v1;
+            cin >> u >> v1;
+           v[u].push_back(v1);
+        }
+        while(l--)
+        {
+            int a;
+            cin>>a;
+            dfs(a);
+        }
+        int c=0;
+        for(int i=0;i<=n;i++)
+        {
+            c+=visited[i];
+        }
+        cout<<c<<endl;
+    }
+    return 0;
+}
