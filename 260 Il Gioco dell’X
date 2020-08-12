@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+char ar[201][201];
+int node;
+int visit[][2]={{-1,-1},{-1,0},{0,-1},{0,1},{1,0},{1,1}};
+void dfs(int i,int j,char c,int &win)
+{
+    ar[i][j]=' ';
+    if(c=='b' and i==node-1)
+        win=1;
+    if(c=='w' and j==node-1)
+        win=2;
+    for(int k=0;k<6;k++)
+    {
+        int r=i+visit[k][0];
+        int p=j+visit[k][1];
+        if(r<0 or p<0 or p>=node or r>=node)
+            continue;
+        if(ar[r][p]==c)
+            dfs(r,p,c,win);
+    }
+
+}
+int main()
+{
+    int c=1;
+    while(cin>>node ,node)
+    {
+        for(int i=0;i<node;i++)
+        {
+           scanf("%s",ar[i]);
+        }
+        int win=0;
+        for(int i=0;i<node;i++)
+        {
+            if(ar[i][0]=='w')
+            {
+                dfs(i,0,'w',win);
+            }
+        }
+        for(int i=0;i<node;i++)
+        {
+            if(ar[0][i]=='b')
+            {
+                dfs(0,i,'b',win);
+            }
+        }
+        cout<<c++<<" ";
+        if(win==1)
+            cout<<"B"<<endl;
+        else
+            cout<<"W"<<endl;
+    }
+    return 0;
+}
