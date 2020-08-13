@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll m;
+ll mode(ll n,ll p)
+{
+    if(p==0)
+        return 1;
+    if(p%2==0)
+    {
+        ll ret=mode(n,p/2);
+        return((ret%m)*(ret%m))%m;
+    }
+    else
+        return((n%m)*(mode(n,p-1)%m))%m;
+}
+int main()
+{
+    ll n,p;
+    while(cin>>n>>p>>m)
+    {
+      ll r=mode(n,p);
+      cout<<r<<endl;
+    }
+    return 0;
+}
