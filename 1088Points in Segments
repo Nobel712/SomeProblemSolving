@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int mx =1e5+5;
+int ar[mx];
+int n;
+void result (int l,int r)
+{
+    int *s= lower_bound(ar, ar+n, l);
+    int *t= upper_bound(ar, ar+n, r);
+    printf("%d\n",t-s);
+}
+int main()
+{
+    int t,cas=1;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int m;
+        scanf("%d %d",&n,&m);
+        for(int i=0; i<n; i++)
+        {
+            scanf("%d",ar+i);
+        }
+        cout<<"Case "<<cas++<<":"<<endl;
+        while(m--)
+        {
+            int l,r;
+            scanf("%d %d",&l,&r);
+            result(l,r);
+        }
+    }
+    return 0;
+}
