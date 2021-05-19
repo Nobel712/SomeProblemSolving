@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+map<string,int>m;
+vector<string>v;
+void stream(string s)
+{
+    string r;
+    stringstream ss(s);
+    while(ss>>r)
+    {
+        v.push_back(r);
+    }
+}
+int math(string s)
+{
+    int r,f=0,p;
+    stringstream ss(s);
+    while(ss>>r)
+    {
+        p=(r*10)+r;
+        f++;
+        if(f==1)
+        {
+            p=r;
+        }
+    }
+    return p*10;
+}
+int main()
+{
+    int p,g;
+    cin>>p>>g;
+    for(int i=0; i<p; i++)
+    {
+        string s;
+        int a,b,r;
+        char c;
+        cin>>s>>a>>c>>b;
+        m[s]=(a*10)+b;
+    }
+    int c=1;
+    cin.ignore();
+    while(g--)
+    {
+        string s,n;
+        v.clear();
+        getline(cin,s);
+        stream(s);
+        float sum=0;
+        sum=m[v[0]];
+        cout<<"Guess #"<<c++<<" ";
+        for(int i=1; i<v.size()-2; i++)
+        {
+            if(v[i]=="+")
+            {
+                sum+=m[v[i+1]];
+            }
+        }
+        int b=sum, r=math(v[v.size()-1]);
+        n=v[v.size()-2];
+        if(n=="<" )
+        {
+            if(b<r)
+                cout<<"was correct.";
+            else
+                cout<<"was incorrect.";
+        }
+        else if(n=="=")
+        {
+            if(b==r)
+                cout<<"was correct.";
+
+            else
+                cout<<"was incorrect.";
+        }
+        else if(n=="<=")
+        {
+            if(b <= r)
+                cout<<"was correct.";
+            else
+                cout<<"was incorrect.";
+        }
+        else if(n==">=")
+        {
+            if(b>=r)
+                cout<<"was correct.";
+            else
+                cout<<"was incorrect.";
+        }
+        else
+        {
+            if(b>r)
+                cout<<"was correct.";
+            else
+                cout<<"was incorrect.";
+        }
+        cout<<endl;
+    }
+    return 0;
+}
+
+
